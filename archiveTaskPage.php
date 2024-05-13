@@ -45,9 +45,9 @@ if (isset($_GET['restore_msg'])) {
 }
 ?>
 
-
+<body class="bg-gradient-to-r from-gray-50 to-blue-100">
 <section class="container mx-auto mt-[40px]">
-    <div class="border p-6 mx-5 md:p-8 shadow-md rounded-[24px]">
+    <div class="border p-6 mx-5 md:p-8 shadow-md rounded-[24px] bg-white">
 
         <div class="flex items-center justify-between gap-x-3">
             <div>
@@ -133,7 +133,7 @@ if (isset($_GET['restore_msg'])) {
                             <div class="flex items-center p-20 text-center bg-gray-50">
                                 <div class="flex flex-col w-full max-w-sm px-4 mx-auto">
                                     <div class="p-3 mx-auto text-blue-500 bg-blue-100 rounded-full">
-                                    <img src="SadVaultBoy.png" class="w-40 h-40" alt="Close" />
+                                    <img src="stuff/SadVaultBoy.png" class="w-40 h-40" alt="Close" />
                                     </div>
                                     <h1 class="mt-3 text-lg text-gray-800">No tasks completed</h1>
                                     <p class="mt-2 text-gray-500">You haven't completed any tasks yet</p>
@@ -166,7 +166,7 @@ if (isset($_GET['restore_msg'])) {
 
         echo '<div class="items-center hidden lg:flex gap-x-3">';
         for ($i = 1; $i <= $totalPages; $i++) {
-            echo '<a href="?id=' . $id . '&page=' . $i . '" class="px-2 py-1 text-sm ' . ($i == $page ? 'text-purple-500' : 'text-gray-500') . ' rounded-md ' . ($i == $page ? 'bg-purple-100/60' : 'hover:bg-gray-100') . '">';
+            echo '<a href="?id=' . $id . '&page=' . $i . '" class="px-2 py-1 text-sm transition-all duration-300 transform hover:-translate-y-1 hover:scale-110' . ($i == $page ? 'text-purple-500' : 'text-gray-500') . ' rounded-md ' . ($i == $page ? 'bg-purple-100/60' : 'hover:bg-gray-100') . '">';
             echo $i;
             echo '</a>';
         }
@@ -186,5 +186,6 @@ if (isset($_GET['restore_msg'])) {
 
     </div>
 </section>
+</body>
 
 <?php include ("stuff/foot.php");

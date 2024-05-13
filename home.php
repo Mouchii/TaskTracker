@@ -200,7 +200,7 @@ if (isset($_GET['delete_msg'])) {
                                         <tr>
                                             <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
                                                 <div class="flex justify-center mb-0">
-                                                    <input id="default-checkbox" type="checkbox" value="" onclick="confirmArchive(<?= $id; ?>, <?= $row['TaskID']; ?>)" class="w-5 h-5 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                    <input id="default-checkbox" type="checkbox" value="" onclick="confirmArchive(<?= $id; ?>, <?= $row['TaskID']; ?>)" class="w-5 h-5 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 cursor-pointer">
                                                     <script>
                                                         function confirmArchive(userID, taskID) {
                                                             event.preventDefault();
@@ -225,7 +225,7 @@ if (isset($_GET['delete_msg'])) {
                                             </td>
                                             <td class="px-4 py-4 text-sm whitespace-nowrap">
                                                 <div class="flex justify-center gap-x-6 ">
-                                                <a href="editTaskPage.php?userID=<?= $id; ?>&taskID=<?= $row['TaskID']; ?>" class="flex flex-row gap-x-3 text-purple-500 transition-colors duration-200 hover:text-green-500 focus:outline-none">
+                                                <a href="editTaskPage.php?userID=<?= $id; ?>&taskID=<?= $row['TaskID']; ?>" class="flex flex-row gap-x-3 text-purple-700 transition-all duration-200 hover:text-indigo-500 focus:outline-none transform hover:-translate-y-1 hover:scale-110">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                                         </svg>
@@ -256,7 +256,7 @@ if (isset($_GET['delete_msg'])) {
                             <div class="flex items-center p-20 text-center bg-gray-50">
                                 <div class="flex flex-col w-full max-w-sm px-4 mx-auto">
                                     <div class="p-3 mx-auto text-blue-500 bg-blue-100 rounded-full">
-                                    <img src="VaultBoy.png" class="w-40 h-40" alt="Close" />
+                                    <img src="stuff/VaultBoy.png" class="w-40 h-40" alt="Close" />
                                     </div>
                                     <h1 class="mt-3 text-lg text-gray-800">No tasks found</h1>
                                     <p class="mt-2 text-gray-500">You are all out of tasks!</p>
@@ -288,7 +288,7 @@ if (isset($_GET['delete_msg'])) {
 
         echo '<div class="items-center hidden lg:flex gap-x-3">';
         for ($i = 1; $i <= $totalPages; $i++) {
-            echo '<a href="?id=' . $id . '&page=' . $i . '" class="px-2 py-1 text-sm ' . ($i == $page ? 'text-purple-500' : 'text-gray-500') . ' rounded-md ' . ($i == $page ? 'bg-purple-100/60' : 'hover:bg-gray-100') . '">';
+            echo '<a href="?id=' . $id . '&page=' . $i . '" class="px-2 py-1 text-sm transition-all duration-300 transform hover:-translate-y-1 hover:scale-110' . ($i == $page ? 'text-purple-700' : 'text-gray-500') . ' rounded-md ' . ($i == $page ? 'bg-purple-700/15' : 'hover:bg-gray-100') . '">';
             echo $i;
             echo '</a>';
         }

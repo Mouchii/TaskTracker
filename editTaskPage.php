@@ -22,8 +22,9 @@ if (isset($_POST['updateTask'])) {
     $tID = $_GET['taskID'];
     $tname = $_POST['tName'];
     $tdeadline = $_POST['tDeadline'];
+    $ttimedeadline = $_POST['tTimeDeadline'];
 
-    $query = "UPDATE `tasks` SET `TaskName` = '$tname', `TaskDeadline` = '$tdeadline' WHERE `UserID` = '$uID' AND `TaskID` = '$tID'";
+    $query = "UPDATE `tasks` SET `TaskName` = '$tname', `TaskDeadline` = '$tdeadline', `TaskTimeDeadline` = '$ttimedeadline' WHERE `UserID` = '$uID' AND `TaskID` = '$tID'";
     $result = mysqli_query($connection, $query);
 
     if (!$result) {
@@ -43,23 +44,39 @@ ob_end_flush();
 function validateForm() {
     var tname = document.getElementById("task-Name").value;
     var tDeadline = document.getElementById("task-Deadline").value;
-    
+    var tTimeDeadline = document.getElementById("task-TimeDeadline").value;
 
-    if (tname === "" || tDeadline === "" ) {
+    if (tname === "" || tDeadline === "" || tTimeDeadline === "" ) {
         alert("Please fill out all the necessary details.");
         return false;
     }
 
     var currentDate = new Date();
-    var enteredDeadline = new Date(tDeadline);
+    var currentTime = new Date();
+    var enteredDeadline = new Date(tDeadline + " " + tTimeDeadline);
 
-    if (enteredDeadline <= currentDate) {
-        alert("Invalid deadline. Please enter a valid deadline for your task.");
+
+    var enteredTimeArray = tTimeDeadline.split(':');
+    var enteredHour = parseInt(enteredTimeArray[0]);
+    var enteredMinute = parseInt(enteredTimeArray[1].slice(0, 2));
+    var enteredPeriod = enteredTimeArray[1].slice(2);
+
+    if (enteredPeriod === 'PM' && enteredHour < 12) {
+        enteredHour += 12;
+    } else if (enteredPeriod === 'AM' && enteredHour === 12) {
+        enteredHour = 0;
+    }
+
+    var enteredTimeDeadline = new Date();
+    enteredTimeDeadline.setHours(enteredHour);
+    enteredTimeDeadline.setMinutes(enteredMinute);
+
+    if (enteredDeadline < currentDate || (enteredDeadline.getTime() === currentDate.getTime() && enteredTimeDeadline <= currentTime)) {
+        alert("Invalid deadline or time. Please enter a valid deadline and time for your task.");
         return false;
     }
 
     return true;
-
 }
 </script>
 
@@ -97,6 +114,14 @@ function validateForm() {
                         <label for="task-Deadline" class="block text-sm font-medium leading-6 text-gray-900">Set Deadline</label>
                         <div class="mt-2">
                             <input type="date" name="tDeadline" id="task-Deadline" value="<?= $row['TaskDeadline'] ?>"
+                                class="px-5 h-12 block w-9/12 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6">
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label for="task-timedeadline" class="block text-sm font-medium leading-6 text-gray-900">Set Time Deadline</label>
+                        <div class="mt-2">
+                            <input type="time" name="tTimeDeadline" id="task-TimeDeadline" value="<?= $row['TaskTimeDeadline']; ?>"
                                 class="px-5 h-12 block w-9/12 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>

@@ -51,7 +51,7 @@ if (isset($_GET['restore_msg'])) {
 
         <div class="flex items-center justify-between gap-x-3">
             <div>
-                <h2 class="text-lg font-medium text-gray-800">Task Archives</h2>
+                <h2 class="text-2xl font-medium text-gray-800">Task Archives</h2>
             </div>
         </div>
 
@@ -111,7 +111,7 @@ if (isset($_GET['restore_msg'])) {
                                                 <?= $row['TaskName']; ?>
                                             </td>
                                             <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                                                <?= $row['CompletionDate']; ?>
+                                                <?= $row['CompletionDate']; ?> || <?= date("g:i A", strtotime($row['CompletionTime'])); ?>
                                             </td>
 
                                         </tr>

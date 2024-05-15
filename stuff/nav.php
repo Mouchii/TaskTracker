@@ -15,7 +15,7 @@
                         document.querySelector('.logo').src = 'stuff/TaskTracker.png';
                     }
                 </script>
-                <a href="home.php?id=<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>" class="text-white text-3xl ">
+                <a href="home.php?id=<?php echo isset($_GET['id']) ? $_GET['id'] : (isset($_GET['userID']) ? $_GET['userID'] : '');  ?>" class="text-white text-3xl ">
                     <span class="font-bold">Task Tracker</span>
                 </a>
             </div>
@@ -37,8 +37,8 @@
 
         <div x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']" class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-blue-600 md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:flex md:items-center">
             <div class="flex flex-col md:flex-row md:mx-6">
-                <a class="lg:px-[15px] lg:py-[5px] rounded-md my-2 text-white transition-all duration-300 transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg md:mx-4 md:my-0" href="home.php?id=<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>">Home</a>
-                <a class="lg:px-[15px] lg:py-[5px] rounded-md my-2 text-white transition-all duration-300 transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg md:mx-4 md:my-0" href="archiveTaskPage.php?id=<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>">Archives</a>
+                <a class="lg:px-[15px] lg:py-[5px] rounded-md my-2 text-white transition-all duration-300 transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg md:mx-4 md:my-0" href="home.php?id=<?php echo isset($_GET['id']) ? $_GET['id'] : (isset($_GET['userID']) ? $_GET['userID'] : ''); ?>">Home</a>
+                <a class="lg:px-[15px] lg:py-[5px] rounded-md my-2 text-white transition-all duration-300 transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg md:mx-4 md:my-0" href="archiveTaskPage.php?id=<?php echo isset($_GET['id']) ? $_GET['id'] : (isset($_GET['userID']) ? $_GET['userID'] : ''); ?>">Archives</a>
                 <a class="lg:px-[15px] lg:py-[5px] rounded-md my-2 text-white transition-all duration-300 transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg md:mx-4 md:my-0 cursor-pointer" onclick="confirmLogOut()">Log Out</a>
                 <script>
                     function confirmLogOut() {

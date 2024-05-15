@@ -12,24 +12,41 @@ include("stuff/nav.php");
 function validateForm() {
     var tname = document.getElementById("taskName").value;
     var tDeadline = document.getElementById("tDeadline").value;
+    var tTimeDeadline = document.getElementById("tTimeDeadline").value;
 
-    if (tname === "" || tDeadline === "" ) {
+    if (tname === "" || tDeadline === "" || tTimeDeadline === "" ) {
         alert("Please fill out all the necessary details.");
         return false;
     }
 
     var currentDate = new Date();
-    var enteredDeadline = new Date(tDeadline);
+    var enteredDeadline = new Date(tDeadline + " " + tTimeDeadline);
 
-    if (enteredDeadline < currentDate) {
-        alert("Invalid deadline. Please enter a valid deadline for your task.");
+
+    var enteredTimeArray = tTimeDeadline.split(':');
+    var enteredHour = parseInt(enteredTimeArray[0]);
+    var enteredMinute = parseInt(enteredTimeArray[1].slice(0, 2));
+    var enteredPeriod = enteredTimeArray[1].slice(2);
+
+    if (enteredPeriod === 'PM' && enteredHour < 12) {
+        enteredHour += 12;
+    } else if (enteredPeriod === 'AM' && enteredHour === 12) {
+        enteredHour = 0;
+    }
+
+    var enteredTimeDeadline = new Date();
+    enteredTimeDeadline.setHours(enteredHour);
+    enteredTimeDeadline.setMinutes(enteredMinute);
+
+    if (enteredDeadline < currentDate || (enteredDeadline.getTime() === currentDate.getTime() && enteredTimeDeadline <= currentTime)) {
+        alert("Invalid deadline or time. Please enter a valid deadline and time for your task.");
         return false;
     }
 
     return true;
-
 }
 </script>
+
 
 <!-- end of form validation -->
 <body class="bg-gradient-to-r from-gray-50 to-blue-100">
@@ -41,7 +58,7 @@ function validateForm() {
 
             <div class="border-b border-gray-900/10 pb-12">
                 <h2 class="text-lg font-semibold leading-7 text-gray-900">Task Details</h2>
-                <p class="mt-1 text-sm leading-6 text-gray-600">Every input should be filled out with an appropriate
+                <p class="mt-1 text-sm leading-6 text-gray-600">Every input should be filled out with appropriate
                     task details.</p>
 
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-4">
@@ -55,9 +72,17 @@ function validateForm() {
                     </div>
 
                     <div class="sm:col-span-3">
-                        <label for="task-deadline" class="block text-sm font-medium leading-6 text-gray-900">Set Deadline</label>
+                        <label for="task-deadline" class="block text-sm font-medium leading-6 text-gray-900">Set Date Deadline</label>
                         <div class="mt-2">
                             <input type="date" name="tDeadline" id="tDeadline"
+                                class="px-5 h-12 block w-9/12 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6">
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label for="task-timedeadline" class="block text-sm font-medium leading-6 text-gray-900">Set Time Deadline</label>
+                        <div class="mt-2">
+                            <input type="time" name="tTimeDeadline" id="tTimeDeadline"
                                 class="px-5 h-12 block w-9/12 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>

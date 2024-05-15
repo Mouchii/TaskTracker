@@ -32,11 +32,11 @@ function validateForm() {
 </script>
 
 <!-- end of form validation -->
-
+<body class="bg-gradient-to-r from-gray-50 to-blue-100">
 <form method="post" action="insertdata.php" onsubmit="return validateForm()">
 
-    <div class=" space-y-12 border p-10 sm:rounded-[24px] sm:my-10 sm:mx-10 lg:mx-36 lg:my-10 md:p-8 lg:p-10 md:m-10
-    shadow-md rounded-[0] md:rounded-[24px] lg:rounded-[24px]">
+    <div class="space-y-12 border p-10 sm:rounded-[24px] sm:my-10 sm:mx-10 lg:mx-36 lg:my-10 md:p-8 lg:p-10 md:m-10
+    shadow-md rounded-[0] md:rounded-[24px] lg:rounded-[24px] bg-white">
         <div class=" pb-0">
 
             <div class="border-b border-gray-900/10 pb-12">
@@ -78,3 +78,4 @@ function validateForm() {
 
         </div>
 </form>
+</body>

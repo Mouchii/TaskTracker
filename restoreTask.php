@@ -5,7 +5,7 @@ if (isset($_GET['userID']) && isset($_GET['taskID'])) {
     $uID = $_GET['userID'];
     $tID = $_GET['taskID'];
 
-    $stmt = $connection->prepare("SELECT * FROM `archives` WHERE `UserID` = ? AND `TaskID` = ?");
+    $stmt = $connection->prepare("SELECT * FROM `archives` WHERE `is_archived` = 1 AND `UserID` = ? AND `TaskID` = ?");
     $stmt->bind_param("ii", $uID, $tID);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -19,8 +19,8 @@ if (isset($_GET['userID']) && isset($_GET['taskID'])) {
         }
 
         if (isset($_GET['userID']) && isset($_GET['taskID'])) {
-            $stmt = $connection->prepare("INSERT INTO `tasks` (`TaskID`, `TaskName`, `TaskDeadline`, `UserID`) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("issi", $tID, $tName, $tDeadline, $uID);
+            $stmt = $connection->prepare("UPDATE `tasks` SET `is_archived` = 0 WHERE `UserID` = ? AND `TaskID` = ?");
+            $stmt->bind_param("ii", $uID, $tID);
             $stmt->execute();
         }
 
@@ -28,8 +28,7 @@ if (isset($_GET['userID']) && isset($_GET['taskID'])) {
             $uID = $_GET['userID'];
             $tID = $_GET['taskID'];
 
-            // Prepare the DELETE statement
-            $stmt = $connection->prepare("DELETE FROM `archives` WHERE `UserID` = ? AND `TaskID` = ?");
+            $stmt = $connection->prepare("UPDATE `archives` SET `is_archived` = 0 WHERE `UserID` = ? AND `TaskID` = ?");
             $stmt->bind_param("ii", $uID, $tID);
             $stmt->execute();
 

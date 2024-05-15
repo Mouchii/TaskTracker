@@ -78,7 +78,7 @@ if (isset($_GET['restore_msg'])) {
                                 $page = isset($_GET['page']) ? max(1, $_GET['page']) : 1;
                                 $rowsPerPage = 6; 
 
-                                $query = "SELECT * FROM `archives` WHERE `UserID` = '$id' LIMIT " . ($page - 1) * $rowsPerPage . ", $rowsPerPage";
+                                $query = "SELECT * FROM `archives` WHERE `is_archived` = 1 AND `UserID` = '$id' LIMIT " . ($page - 1) * $rowsPerPage . ", $rowsPerPage";
                                 $result = mysqli_query($connection, $query);
 
                                 if (!$result) {

@@ -30,7 +30,7 @@ if (isset($_GET['userID']) && isset($_GET['taskID'])) {
         $uID = $_GET['userID'];
         $tID = $_GET['taskID'];
 
-        $stmt = $connection->prepare("DELETE FROM `tasks` WHERE `UserID` = ? AND `TaskID` = ?");
+        $stmt = $connection->prepare("UPDATE `tasks` SET `is_archived` = 1 WHERE `UserID` = ? AND `TaskID` = ?");
         $stmt->bind_param("ii", $uID, $tID);
         $stmt->execute();
 

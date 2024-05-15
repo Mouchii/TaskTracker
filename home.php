@@ -189,7 +189,7 @@ if (isset($_GET['delete_msg'])) {
                                 $page = isset($_GET['page']) ? $_GET['page'] : 1;
                                 $rowsPerPage = 6;
 
-                                $query = "SELECT * FROM `tasks` WHERE `UserID` = '$id' LIMIT " . ($page - 1) * $rowsPerPage . ", $rowsPerPage";
+                                $query = "SELECT * FROM `tasks` WHERE `is_archived` = 0 AND `UserID` = '$id' LIMIT " . ($page - 1) * $rowsPerPage . ", $rowsPerPage";
                                 $result = mysqli_query($connection, $query);
 
                                 if (!$result) {

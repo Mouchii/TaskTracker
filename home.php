@@ -175,8 +175,6 @@ if (isset($_GET['delete_msg'])) {
                                     <tr>
                                         <th scope="col" class="text-sm font-normal text-center rtl:text-right text-gray-500 ">
                                             Completion</th>
-                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500 ">
-                                            ID</th>
                                         <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 ">
                                             Name</th>
                                         <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 ">
@@ -215,11 +213,8 @@ if (isset($_GET['delete_msg'])) {
                                                         </script>
                                                     </div>
                                                 </td>
-                                                <td class="px-4 py-4 flex justify-center text-sm text-gray-500  whitespace-nowrap">
-                                                    <?= $row['TaskID']; ?>
-                                                </td>
                                                 <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                                                    <?= $row['TaskName'] ?>
+                                                <?= nl2br(chunk_split($row['TaskName'], 45, "\n")) ?>
                                                 </td>
                                                 <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
                                                     <?= $row['TaskDeadline']; ?> || <?= date("g:i A", strtotime($row['TaskTimeDeadline'])); ?>
@@ -313,15 +308,16 @@ if (isset($_GET['delete_msg'])) {
 
     <section class="container mx-auto mt-[40px] ">
         <div class="border p-6 mx-5 md:p-8 drop-shadow-xl rounded-[24px] bg-white">
-            <div class="flex items-center justify-between gap-x-3">
+            <div class="flex items-center justify-between gap-x-3 pb-5">
                 <div>
                     <div class="flex items-center gap-x-3">
                         <h2 class="text-2xl font-medium text-gray-800">Deadlines </h2>
                     </div>
                 </div>
             </div>
-                
-            <!-- sudlig deadline shit -->
+            <?php 
+            include("stuff/timeline.php");
+            ?>
     </section>
 <div class="py-6">
 </div>

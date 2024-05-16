@@ -64,8 +64,6 @@ if (isset($_GET['restore_msg'])) {
                                 <tr>
                                     <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500 ">
                                         Completion</th>
-                                    <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500 ">
-                                        Task ID</th>
                                     <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 ">
                                         Task Name</th>
                                     <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 ">
@@ -104,11 +102,8 @@ if (isset($_GET['restore_msg'])) {
 
                                                 </div>
                                             </td>
-                                            <td class="px-4 py-4 flex justify-center text-sm text-gray-500  whitespace-nowrap">
-                                                <?= $row['TaskID']; ?>
-                                            </td>
                                             <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                                                <?= $row['TaskName']; ?>
+                                            <?= nl2br(chunk_split($row['TaskName'], 75, "\n")) ?>
                                             </td>
                                             <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
                                                 <?= $row['CompletionDate']; ?> || <?= date("g:i A", strtotime($row['CompletionTime'])); ?>
